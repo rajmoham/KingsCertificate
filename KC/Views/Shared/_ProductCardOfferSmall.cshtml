@@ -1,0 +1,63 @@
+﻿@model Product
+
+
+<div class="card my-2" style="width:18rem">
+    <div class="d-flex align-items-stretch">
+        <div class="row g-0 align-self-stretch">
+            <div class="col-3 col-lg-4 d-flex align-items-center">
+                <a asp-controller="Browsing"
+                   asp-action="Details"
+                   asp-route-id="@Model.productId">
+                    <img src="@Model.FurtherDetails.ImageUrl" style="width:100%">
+                </a>
+            </div>
+            <div class="col-9 col-lg-8 d-flex align-items-center bg-light invert-on-hover">
+                <div class="card-body">
+                    <a asp-controller="Browsing"
+                       asp-action="Details"
+                       asp-route-id="@Model.productId" class="text-decoration-none">
+                        <p class="card-text text-dark">@Model.DisplayName</p>
+                    </a>
+                    <div class="btn-group m-0 p-0 d-flex">
+                        <a class="btn btn-sm btn-lightgreen">@Model.FurtherDetails.DisplayPrice</a>
+                        <a class="btn btn-sm btn-success" asp-controller="Browsing" asp-action="Details" asp-route-id="@Model.productId">Buy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+    <div class="card m-1" style="width: 18rem;">
+        <img src="@Model.FurtherDetails.ImageUrl" class="card-img-top mt-2" alt="@($"Image of {Model.FurtherDetails.DisplayName}")">
+        <div class="card-body">
+            <h5 class="card-title p-0 m-0">@Model.DisplayName</h5>
+        </div>
+        <div class="d-grid gap-1 card-footer pt-0 mt-0" style="background-color: transparent !important; border-top-width: 0px !important;">
+            <div>
+                <p class="text-danger text-center fs-6 text-decoration-line-through p-0 m-0">£@(String.Format("{0:0.00}", Model.FurtherDetails.ListPrice * 1.2))</p>
+                <p class="text-success text-center p-1 m-0 fs-4 fw-bold">
+                    @Model.FurtherDetails.DisplayPrice
+                </p>
+            </div>
+            <a class="btn btn-outline-success"
+               asp-controller="Browsing"
+               asp-action="Details"
+               asp-route-id="@Model.productId">View</a>
+            @if (Model.QuantityInCart == 0)
+            {
+                <a class="btn btn-success" onclick="updateQuantity(@Model.productId, 1)">Add to Cart</a>
+            }
+            else
+            {
+                <div class="btn-group">
+                    <a class="btn btn-lightgreen m-0" onclick="updateQuantityMinus(@Model.productId)"><i class="fa fa-minus"></i></a>
+                    <a class="btn border-top border-bottom border-lightgreen">@Model.QuantityInCart</a>
+                    <a class="btn btn-lightgreen m-0" onclick="updateQuantityPlus(@Model.productId)"><i class="fa fa-plus"></i></a>
+                </div>
+            }
+        </div>
+    </div>
+
+*@

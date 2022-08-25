@@ -1,0 +1,38 @@
+﻿@model Product
+
+<div class="card m-1" style="width: 18rem;" id="@Model.productId">
+    <a
+       asp-controller="Browsing"
+       asp-action="Details"
+       asp-route-id="@Model.productId">
+        <img src="@Model.FurtherDetails.ImageUrl" class="card-img-top mt-2" alt="@($"Image of {Model.FurtherDetails.DisplayName}")">
+    </a>
+    <div class="card-body">
+        <a asp-controller="Browsing"
+           asp-action="Details"
+           asp-route-id="@Model.productId" class=" text-decoration-none">
+
+            <h5 class="card-title text-dark p-0 m-0">@Model.DisplayName</h5>
+
+        </a>
+    </div>
+    <div class="d-grid gap-2 card-footer" style="background-color: transparent !important; border-top-width: 0px !important;">
+        <p class="card-text text-success text-center fs-5 fw-bold p-1 m-0">@Model.FurtherDetails.DisplayPrice</p>
+        <a class="btn btn-outline-success"
+           asp-controller="Browsing"
+           asp-action="Details"
+           asp-route-id="@Model.productId">View</a>
+        @if (Model.QuantityInCart == 0)
+        {
+            <a class="btn btn-success" onclick="updateQuantity(@Model.productId, 1)">Add to Basket</a>
+        }
+        else
+        {
+    <div class="btn-group">
+        <a class="btn btn-lightgreen m-0" onclick="updateQuantityMinus(@Model.productId)"><i class="fa fa-minus"></i></a>
+        <a class="btn border-top border-bottom border-lightgreen">@Model.QuantityInCart</a>
+        <a class="btn btn-lightgreen m-0" onclick="updateQuantityPlus(@Model.productId)"><i class="fa fa-plus"></i></a>
+    </div>
+        }
+    </div>
+</div>

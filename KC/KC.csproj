@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Models\ViewModels\" />
+    <Folder Include="wwwroot\json\" />
+    <Folder Include="Models\ViewModels\Home\" />
+    <Folder Include="Models\ViewModels\Browsing\" />
+    <Folder Include="Views\Browsing\" />
+    <Folder Include="Views\Basket\" />
+    <Folder Include="Models\ViewModels\Basket\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Audio\Roblox Death Sound - Sound Effect %28HD%29.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.7" />
+  </ItemGroup>
+</Project>

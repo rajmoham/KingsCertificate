@@ -1,0 +1,97 @@
+﻿@model KC.Models.ViewModels.Home.SurveyVM
+
+@{
+    ViewData["Title"] = "Survey";
+}
+
+<div class="mt-5">
+    <h1>A few questions for you...</h1>
+    <hr />
+    <p class="text-body fs-5">Thank you for trying out our website. Every little comment helps and every little comment is appreciated.</p>
+    <p class="text-body fs-5">Before you fill out the form, please read the following notes which explain what each part of the survey refers to.<br /><span class="fs-6">In addition, please <a href="#problems">scroll down</a> to have a look at problems we know about before filling the form!</span></p>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr class="bg-darkgreen text-lightgreen">
+                    <th scope="col">Aspect</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-light">
+                    <td class="fw-bold">General aesthetic</td>
+                    <td>How does the website look and feel?<br />Do you think the idea of freshness is portrayed by the green colour scheme?<br />Does it look like a user-friendly grocery shopping website?<br />Have you tried it on mobile? Is it device-responsive?</td>
+                </tr>
+                <tr class="table-light">
+                    <td class="fw-bold">General functionality</td>
+                    <td>Does everything run smoothly? <i>(please ignore the initial loading time)</i><br /> Are the links (e.g. product images) easy to click on? </td>
+                </tr>
+                <tr class="table-light">
+                    <td class="fw-bold">Browsing</td>
+                    <td>Does the multi-level navigation bar work well?<br />Is it easy to find the category you are looking for?</td>
+                </tr>
+                <tr class="table-light">
+                    <td class="fw-bold">Searching</td>
+                    <td>Try a few searches - do you get what you are looking for?<br />Does a mis-spelling get a spelling suggestion?</td>
+                </tr>
+                <tr class="table-light">
+                    <td class="fw-bold">Basket functionality</td>
+                    <td>Can you easily add an item to your basket?<br />Is it easy to update your basket?<br />Does the basket page function as intended?</td>
+                </tr>
+                <tr class="table-light">
+                    <td class="fw-bold">Login/register pages</td>
+                    <td>Try logging in or registering - does everything run smoothly?<br />Are the specified social login links sufficient?</td>
+                </tr>
+                <tr class="table-light">
+                    <td class="fw-bold">Contact page</td>
+                    <td>Does it feel simple and easy to contact JR<sup>2</sup>?<br />Is it easy to find the contact page?</td>
+                </tr>
+                <tr class="table-light">
+                    <td class="fw-bold">Suggested products</td>
+                    <td>Are the suggested products relevant to what you are looking at?<br />Are there a reasonable number of suggestions?</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        <iframe class="flex-fill"
+                height="480px"
+                src="https://forms.office.com/Pages/ResponsePage.aspx?id=FM9wg_MWFky4PHJAcWVDVlvu2lIpMTdOk4dvK9Wnyl5UN1dUOUtNSUY4NjEzU1Q0STlUT0tFMEtUNi4u&embed=true"
+                frameborder="0"
+                marginwidth="0"
+                marginheight="0"
+                style="border: none;max-width:100%; max-height:100vh"
+                allowfullscreen
+                webkitallowfullscreen
+                mozallowfullscreen
+                msallowfullscreen> </iframe>
+    </div>
+    <hr />
+    <p class="text-body fs-5" id="problems">Below is a summary of potential problems you may have encountered and whether we are aware of them.</p>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr class="bg-darkgreen text-lightgreen">
+                    <th scope="col">#</th>
+                    <th scope="col">Problem</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Comment</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (WebsiteProblem websiteProblem in Model.Problems)
+                {
+                    <tr class="@(WebsiteProblem.statusBackgroundColours[websiteProblem.Status])">
+                        <td class="fw-bold">@(Model.Problems.IndexOf(websiteProblem)+1)</td>
+                        <td>@websiteProblem.Title</td>
+                        <td>@websiteProblem.Description</td>
+                        <td>@WebsiteProblem.statusMessages[websiteProblem.Status]</td>
+                        <td>@websiteProblem.Explanation</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

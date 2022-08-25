@@ -1,0 +1,47 @@
+﻿$position-values: ( 0: 0, 50: 50%, 75: 75%, 100: 100% );
+
+// Required
+@import "../lib/bootstrap/scss/functions";
+@import "../lib/bootstrap/scss/variables";
+@import "../lib/bootstrap/scss/mixins";
+
+$lightgreen: #E7F3E8;
+$darkgreen: #2A6048;
+$moderategreen: #d5e6d7;
+// Create your own map
+$custom-colors: ( "lightgreen": $lightgreen, "darkgreen": $darkgreen, "moderategreen": $moderategreen );
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+$dropdown-link-active-bg: $green;
+
+
+// forms
+$form-check-input-checked-bg-color: $success;
+$input-border-focus: $success;
+
+$input-focus-bg: $input-bg;
+$input-focus-border-color: tint-color($success, 50%);
+$input-focus-color: $input-color;
+$input-focus-width: $input-btn-focus-width;
+$input-focus-box-shadow: 0 0 $input-btn-focus-blur $input-btn-focus-width $lightgreen;
+
+// pagination
+
+$pagination-focus-box-shadow: 0 0 $input-btn-focus-blur $input-btn-focus-width $success;
+$pagination-active-border-color: $success;
+
+// navbar
+$navbar-light-color: $lightgreen;
+$navbar-light-hover-color: $white;
+$navbar-light-active-color: $lightgreen;
+
+// accordion
+$accordion-button-color: $darkgreen;
+$accordion-button-active-bg: $moderategreen;
+
+$accordion-button-focus-border-color: $darkgreen;
+$accordion-button-focus-box-shadow: 0 0 $input-btn-focus-blur $input-btn-focus-width $success;
+
+@import "../lib/bootstrap/scss/bootstrap.scss";

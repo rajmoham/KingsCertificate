@@ -1,0 +1,29 @@
+﻿@model Product
+
+
+<div class="card my-2" style="width:18rem">
+    <div class="row g-0">
+        <div class="d-flex align-items-center">
+            <div class="col-3 p-1">
+                <a asp-controller="Browsing"
+                   asp-action="Details"
+                   asp-route-id="@Model.productId">
+                    <img src="@Model.FurtherDetails.ImageUrl" style="width:100%">
+                </a>
+            </div>
+            <div class="col-9 p-1">
+                <a asp-controller="Browsing"
+                   asp-action="Details"
+                   asp-route-id="@Model.productId" class=" text-decoration-none"><p class="card-text text-dark">@Model.DisplayName</p></a>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer mt-auto">
+        <div class="col-12 d-flex align-items-center justify-content-center bg-light invert-on-hover">
+            <div class="btn-group m-0 p-0 d-flex flex-fill">
+                <a class="btn btn-sm btn-lightgreen">@Model.FurtherDetails.DisplayPrice</a>
+                <a class="btn btn-sm btn-success" asp-controller="Browsing" asp-action="Details" asp-route-id="@Model.productId">Buy</a>
+            </div>
+        </div>
+    </div>
+</div>

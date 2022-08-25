@@ -1,0 +1,245 @@
+﻿@model KC.Models.ViewModels.Basket.IndexVM
+
+@{
+    ViewData["Title"] = "Basket";
+}
+
+<form method="post">
+    <br />
+    <div class="backgroundWhiteBorder">
+        <div class="container row">
+            <div class="col-12 col-lg-9">
+                <div class="card mt-4">
+                    <div class="card-header bg-darkgreen text-light ms-0 row container">
+                        <div class="col-6 fs-4">
+                            <i class="fa fa-shopping-cart"></i> &nbsp;
+                            Basket
+                        </div>
+                        <div class="col-6 d-flex justify-content-end align-items-center pe-0">
+                            <a asp-action="Index" asp-controller="Home"
+                               data-bs-toggle="modal" data-bs-target="#deleteModal1"
+                               class="btn btn-outline-warning btn-sm me-2">Clear cart</a>
+                            <a asp-action="Index" asp-controller="Home" class="btn btn-outline-lightgreen btn-sm">Continue Shopping</a>
+                        </div>
+                    </div>
+                    @if (Model.CartList.Count > 0)
+                    {
+                        <div class="card-body">
+                            <div class=" d-none d-lg-block">
+                                <div class="row text-body fs-6">
+                                    <div class="col-12 col-lg-2">
+                                    </div>
+                                    <div class="col-12 col-lg-4 fw-bold">
+                                        Product Details
+                                    </div>
+                                    <div class="col-4 col-lg-2 fw-bold">
+                                        Price (each)
+                                    </div>
+                                    <div class="col-4 col-lg-2 fw-bold">
+                                        Quantity
+                                    </div>
+                                    <div class="col-4 col-lg-2 fw-bold">
+                                        Total price
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+                            @{
+                                var orderTotal = 0.0;
+                            }
+                            @for (int i = 0; i < Model.CartList.Count; i++)
+                            {
+                                <input hidden asp-for="@Model.CartList[i].Product.productId" />
+                                <div class="row h-100">
+                                    <div class="col-12 col-lg-2 text-center py-2">
+                                        <img src="@Model.CartList[i].Product.FurtherDetails.ImageUrl" class="rounded w-100" />
+                                    </div>
+
+                                    <div class="col-12 col-lg-4 pt-lg-4" style="font-size:11px;">
+                                        <span style="font-size:17px;"> @Model.CartList[i].Product.FurtherDetails.DisplayName</span>
+                                    </div>
+                                    <div class="col-4 col-lg-2 pt-lg-4" style="font-size:11px;">
+                                        <span style="font-size:17px;"> @Model.CartList[i].Product.FurtherDetails.DisplayPrice</span>
+                                    </div>
+                                    @*<div class="col-4 col-lg-2 pt-lg-4" style="font-size:11px;">
+                                            <input type="text" asp-for="@Model.CartList[i].Quantity" class="form-control" />
+                                            <span asp-validation-for="@Model.CartList[i].Quantity" class="text-danger"></span>
+                                        </div>*@
+                                    <div class="d-flex align-items-start col-4 col-lg-2 pt-lg-3">
+                                        <div class="btn-group">
+                                            <a class="btn btn-lightgreen m-0 btn-number" onclick="updateQuantityMinus(@Model.CartList[i].Product.productId)"><i class="fa fa-minus"></i></a>
+                                            <a class="btn border-top border-bottom border-lightgreen input-number">@Model.CartList[i].Quantity</a>
+                                            <a class="btn btn-lightgreen m-0 btn-number" onclick="updateQuantityPlus(@Model.CartList[i].Product.productId)"><i class="fa fa-plus"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-lg-2 pt-lg-4" style="font-size:11px;">
+                                        <span style="font-size:17px;"> £@(string.Format("{0:0.00}", Model.CartList[i].Quantity * Model.CartList[i].Product.FurtherDetails.ListPrice))</span>
+                                    </div>
+                                    @*<div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
+                                            <a asp-action="Remove" asp-route-id="@Model.CartList[i].Product.productId" class="btn btn-outline-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>*@
+                                </div>
+                                orderTotal += Model.CartList[i].Quantity * Model.CartList[i].Product.FurtherDetails.ListPrice;
+                                <hr />
+                            }
+                            @*<div class="row">
+                                    <div class="col-12 text-right pr-4" style="color:#821f3d">
+                                        Order Total: £@string.Format("{0:0.00}", orderTotal)
+                                    </div>
+                                </div>*@
+                            <div class="d-flex justify-content-end fs-5">
+                                <div class="col-3">
+                                    Subtotal
+                                </div>
+                                <div class="col-4 col-lg-2">
+                                    £@string.Format("{0:0.00}", orderTotal)
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end fs-6 text-danger">
+                                <div class="col-3">
+                                    Multibuy discounts
+                                </div>
+                                <div class="col-4 col-lg-2">
+                                    £0.00
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end fs-5 mt-3">
+                                <div class="col-3">
+                                    Total
+                                </div>
+                                <div class="col-4 col-lg-2">
+                                    £@string.Format("{0:0.00}", orderTotal)
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="pt-lg-3 text-center fs-5">Your basket is empty. <a class="pb-lg-3 text-center link-darkgreen" asp-action="Offers" asp-controller="Browsing">Start filling it up!</a></p>
+
+                    }
+                    <div class="card-footer bg-darkgreen">
+                        <div class="row">
+
+                            <div class="col-6 col-md-3 offset-md-6">
+
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <button type="submit" class="btn btn-success form-control ">
+                                    <span>Checkout</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-3">
+                <h5 class="mt-4">@(Model.CartList.Count > 0 ? "Similar buyers also bought..." : "Suggested for you...")</h5>
+                <div class="col-11">
+                    @foreach (Product product in Model.ProductsOffers)
+                    {
+                        <partial name="_ProductCardOfferSmall" model="product" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal 1 -->
+    <div class="modal fade" id="deleteModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Clear cart?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to clear the cart? You cannot undo this action.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" formmethod="post" formnovalidate="formnovalidate" asp-action="ClearCart" class="btn btn-secondary">Clear cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>$('.btn-number').click(function (e) {
+            e.preventDefault();
+
+            fieldName = $(this).attr('data-field');
+            type = $(this).attr('data-type');
+            var input = $("input[name='" + fieldName + "']");
+            var currentVal = parseInt(input.val());
+            if (!isNaN(currentVal)) {
+                if (type == 'minus') {
+
+                    if (currentVal > input.attr('min')) {
+                        input.val(currentVal - 1).change();
+                    }
+                    if (parseInt(input.val()) == input.attr('min')) {
+                        $(this).attr('disabled', true);
+                    }
+
+                } else if (type == 'plus') {
+
+                    if (currentVal < input.attr('max')) {
+                        input.val(currentVal + 1).change();
+                    }
+                    if (parseInt(input.val()) == input.attr('max')) {
+                        $(this).attr('disabled', true);
+                    }
+
+                }
+            } else {
+                input.val(0);
+            }
+        });
+        $('.input-number').focusin(function () {
+            $(this).data('oldValue', $(this).val());
+        });
+        $('.input-number').change(function () {
+
+            minValue = parseInt($(this).attr('min'));
+            maxValue = parseInt($(this).attr('max'));
+            valueCurrent = parseInt($(this).val());
+
+            name = $(this).attr('name');
+            if (valueCurrent >= minValue) {
+                $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
+            } else {
+                alert('Sorry, the minimum value was reached');
+                $(this).val($(this).data('oldValue'));
+            }
+            if (valueCurrent <= maxValue) {
+                $(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled')
+            } else {
+                alert('Sorry, the maximum value was reached');
+                $(this).val($(this).data('oldValue'));
+            }
+
+
+        });
+        $(".input-number").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });</script>
+} 

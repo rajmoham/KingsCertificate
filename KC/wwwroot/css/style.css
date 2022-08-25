@@ -1,0 +1,62 @@
+﻿html{
+    scroll-behaviour: smooth;
+}
+
+.light-green-bg {
+    background-color: #E7F3E8;
+}
+
+.moderate-green-bg {
+    background-color: #d5e6d7;
+}
+
+.dark-green-bg {
+    background-color: #2A6048;
+}
+
+.dark-green-fg {
+    color: #2A6048;
+}
+
+.light-green-hover:hover {
+    background-color: #E7F3E8 !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    font-weight: normal;
+
+    color: rgb(220, 220, 220);
+    transition: 0.2s all ease-in-out;
+    transform: scale(0.95);
+    font-size: 25px;
+    border-radius: 8px;
+}
+
+    .navbar-light .navbar-nav .nav-link.active {
+        /*font-weight: bolder;*/
+        font-weight: 500;
+    }
+
+    .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+        transform: scale(1);
+        background-color: #194a34;
+    }
+
+.low-brightness {
+    filter: brightness(20%);
+}
+
+@media (min-width: 992px) {
+    .navbar li {
+        margin-left: 0.3em;
+        margin-right: 0.3em;
+    }
+}
+
+.accordion-button:not(.collapsed) {
+    color: #2A6048 !important;
+}
+
+    .accordion-button:not(.collapsed)::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232a6048'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+    }

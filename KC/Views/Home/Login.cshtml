@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div id="logreg-forms" class="d-flex justify-content-center">
+    <div class="w-50 card py-3 px-3 mt-5">
+        <h1 class="fs-3 mb-3 font-weight-normal text-success fw-bold pb-3" style="text-align:center;">Sign In</h1>
+        <form id="external-account" method="post" class="form-horizontal">
+            <div class="d-flex">
+                <button type="submit" class="btn btn-block form-control text-light mb-1"
+                        name="provider" value="Facebook"
+               data-toggle="tooltip"
+               title="You're trying to log in using Facebook. Essentially, this is a dummy button."
+                        style="        background-color: #4267B2;">
+                    <i class="fa fa-facebook-f me-2"></i> Facebook
+                </button>
+                <button type="submit" class="btn btn-block form-control text-light mb-1"
+                        name="provider" value="Twitter"
+               data-toggle="tooltip"
+               title="You're trying to log in using Twitter. Essentially, this is a dummy button."
+                        style="        background-color: #1DA1F2;">
+                    <i class="fa fa-twitter me-2"></i> Twitter
+                </button>
+                <button type="submit" class="btn btn-block form-control text-light mb-1"
+                        name="provider" value="Google"
+               data-toggle="tooltip"
+               title="You're trying to log in using Google. Essentially, this is a dummy button."
+                        style="        background-color: #4285F4;">
+                    <i class="fa fa-google me-2"></i> Google
+                </button>
+            </div>
+        </form>
+
+
+        <form id="account" method="post">
+
+            <div class="d-flex align-items-center">
+                <div class="flex-fill">
+                    <hr />
+                </div>
+                <div>
+                    <span class="fw-light">
+                        &nbsp;&nbsp;OR&nbsp;&nbsp;
+                    </span>
+                </div>
+                <div class="flex-fill">
+                    <hr />
+                </div>
+            </div>
+
+            <input placeholder="Email..." type="email" class="mb-1 form-control" />
+            <input placeholder="Password..." type="password" class="form-control" />
+            <div class="d-flex">
+                <button type="submit" class="btn btn-success btn-block flex-fill mt-2"
+               data-toggle="tooltip"
+               title="You're trying to log in, but we haven't exactly got anybody's login details. Essentially, this is a dummy button.">
+                    <i class="fas fa-sign-in-alt"></i> Log in
+                </button>
+            </div>
+
+            <div class="py-1">
+                <a id="forgot-password" class="text-secondary"
+               data-toggle="tooltip"
+               title="You say you've forgotten your password, but you don't actually have an account. Essentially, this is a dummy button.">Forgot your password?</a>
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="d-flex"><a asp-action="Register" class="btn btn-light flex-fill">No account? Sign up today!</a></div>
+
+
+        </form>
+    </div>
+
+</div>
